@@ -26,16 +26,16 @@ def hello():
     return {"message": "Hello"}    
 
 # @router.get("/", response_model=List[schemas.PostResponse]) kada se vracaju samo postovi
-@router.get("/", response_model=List[schemas.PostVotes]) # potrebno je dodati List, jer se vraca lista postova
-def get_posts(db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user), limit: int = 10, skip: int = 0, search: Optional[str] = ""):           # bez List, response model je samo jedan post 
-    #posts = db.query(models.Post).all()                 # moramo specificirati da zelimo listu postova
-    posts = db.query(models.Post).filter(models.Post.title.contains(search)).limit(limit).offset(skip).all()
-    # ako zelimo prikazati samo postove logovanog korisnika dodamo -> filter(models.Post.user_id == current_user.id) 
+# @router.get("/", response_model=List[schemas.PostVotes]) # potrebno je dodati List, jer se vraca lista postova
+# def get_posts(db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user), limit: int = 10, skip: int = 0, search: Optional[str] = ""):           # bez List, response model je samo jedan post 
+#     #posts = db.query(models.Post).all()                 # moramo specificirati da zelimo listu postova
+#     posts = db.query(models.Post).filter(models.Post.title.contains(search)).limit(limit).offset(skip).all()
+#     # ako zelimo prikazati samo postove logovanog korisnika dodamo -> filter(models.Post.user_id == current_user.id) 
 
-    # JOIN operacije nad tabelama pomocu sqlalchemy (join votes tabele na posts tabelu)
-    posts_votes = db.query(models.Post, func.count(models.Vote.post_id).label("votes")).join(models.Vote, models.Vote.post_id == models.Post.id, isouter=True).group_by(models.Post.id).all() 
-    # count(votes.post_id) as votes i group by(post_id)
-    return posts_votes                                                                                                             
+#     # JOIN operacije nad tabelama pomocu sqlalchemy (join votes tabele na posts tabelu)
+#     posts_votes = db.query(models.Post, func.count(models.Vote.post_id).label("votes")).join(models.Vote, models.Vote.post_id == models.Post.id, isouter=True).group_by(models.Post.id).all() 
+#     # count(votes.post_id) as votes i group by(post_id)
+#     return posts_votes                                                                                                             
     
     # limit(limit vracenih postova), skip(preskoci prva dva), search(search based on keyword - title, content..) iznad su query parametri
     # ovi parametri idu nakon znaka ?
