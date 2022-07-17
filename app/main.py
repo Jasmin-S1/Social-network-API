@@ -6,11 +6,11 @@ from .config import settings
 from fastapi.middleware.cors import CORSMiddleware
 
 
-models.Base.metadata.create_all(bind=engine)
+#models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()  
 
-origins = ["*"] # zvjezdica ide ako ce API biti dostupan sasvih domena
+origins = ["*"] # zvjezdica ide ako ce API biti dostupan sa sasvih domena
 
 app.add_middleware(
     CORSMiddleware,   # ovo je funkcija koja se pokrece prije slanja svakog requesta
