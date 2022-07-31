@@ -11,12 +11,10 @@ class Post(Base):
     published = Column(Boolean, server_default='TRUE', nullable=False)
     created_at = Column(TIMESTAMP(timezone=True), server_default=text('NOW()'), nullable=False)
     user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)   
-                                         
-                                          
+    
     # set a relationship - say sqlalchemy to get some information about user based on for example user_id
     user = relationship("User")  # fetch the user based on user_id
                                 
-
 
 class User(Base):                
     __tablename__ = "users"
