@@ -1,6 +1,6 @@
-from passlib.context import CryptContext    # za hash-iranje passworda
+from passlib.context import CryptContext   
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto") # za hash-ianje passworda (ovim se CryptContextu kasze koji je defaultni algoritam kriptiranja)
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def hash(password: str):
     return pwd_context.hash(password)
