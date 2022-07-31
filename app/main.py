@@ -4,10 +4,10 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()  
 
-origins = ["*"] # zvjezdica ide ako ce API biti dostupan sa sasvih domena
+origins = ["*"]
 
 app.add_middleware(
-    CORSMiddleware,   # ovo je funkcija koja se pokrece prije slanja svakog requesta
+    CORSMiddleware,   
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
