@@ -1,7 +1,6 @@
 from email import message
 from fastapi import Depends, Response, status, HTTPException, APIRouter
 from sqlalchemy.orm import Session
-
 from app import oauth2
 from .. import schemas, models
 from ..database import get_db
